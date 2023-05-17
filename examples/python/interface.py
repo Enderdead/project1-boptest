@@ -225,4 +225,5 @@ def control_test(control_module='', start_time=0, warmup_period=0, length=24*360
     res = check_response(requests.put('{0}/results'.format(url), json={'point_names': points, 'start_time': start_time, 'final_time': final_time}))
     df_res = pd.DataFrame.from_dict(res)
     df_res = df_res.set_index('time')
+    res = requests.put('{0}/quit'.format(url), json={})
     return kpi, df_res, custom_kpi_result, forecasts

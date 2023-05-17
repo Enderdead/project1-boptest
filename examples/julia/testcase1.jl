@@ -130,3 +130,9 @@ tab_res=DataFrame([time,TZone,CO2Zone,PHeat,QHeat,uAct],[:time,:TRooAir_y,:CO2Ro
 CSV.write("result_testcase1.csv",tab_res)
 tab_kpi = DataFrame([[kpi["ener_tot"]], [kpi["tdis_tot"]], [kpi["idis_tot"]], [kpi["cost_tot"]], [kpi["time_rat"]], [kpi["emis_tot"]], [kpi["pgas_tot"]]], [:ener_tot, :tdis_tot, :idis_tot, :cost_tot, :time_rat, :emis_tot, :pgas_tot])
 CSV.write("kpi_testcase1.csv",tab_kpi)
+
+# ------------
+# Terminate the simulation server
+# --------------------
+# Put quit command
+res = HTTP.put("$url/quit")

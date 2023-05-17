@@ -7,7 +7,7 @@ The API is implemented using the ``flask`` package.
 
 # GENERAL PACKAGE IMPORT
 # ----------------------
-from flask import Flask, make_response
+from flask import Flask, make_response, request
 from flask_restful import Resource, Api, reqparse
 import flask_restful
 from flask_cors import CORS
@@ -255,6 +255,18 @@ class Submit(Resource):
                     unit_test = False
         status, message, payload = case.post_results_to_dashboard(api_key, tags, unit_test)
         return construct(status, message, payload)
+
+class Quit(Resource):
+    '''Termine the BOPTEST server'''
+
+    def put(self):
+        '''PUT request to termine the BOPTEST server.'''
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            return construct(500, 'server func not found', None)
+        func()
+        return construct(200, '', None)
+
 # --------------------
 
 # ADD REQUESTS TO API WITH URL EXTENSION
@@ -272,6 +284,7 @@ api.add_resource(Scenario, '/scenario')
 api.add_resource(Name, '/name')
 api.add_resource(Version, '/version')
 api.add_resource(Submit, '/submit')
+api.add_resource(Quit, '/quit')
 # --------------------------------------
 
 if __name__ == '__main__':
