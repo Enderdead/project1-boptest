@@ -256,7 +256,7 @@ class Submit(Resource):
         status, message, payload = case.post_results_to_dashboard(api_key, tags, unit_test)
         return construct(status, message, payload)
 
-class Quit(Resource):
+class Stop(Resource):
     '''Termine the BOPTEST server'''
 
     def put(self):
@@ -284,7 +284,7 @@ api.add_resource(Scenario, '/scenario')
 api.add_resource(Name, '/name')
 api.add_resource(Version, '/version')
 api.add_resource(Submit, '/submit')
-api.add_resource(Quit, '/quit')
+api.add_resource(Stop, '/stop')
 # --------------------------------------
 
 if __name__ == '__main__':

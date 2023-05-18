@@ -145,4 +145,4 @@ CSV.write("kpi_testcase2.csv",tab_kpi)
 # Terminate the simulation server
 # --------------------
 # Put quit command
-res = HTTP.put("$url/quit")
+res = HTTP.put("$url/stop")
